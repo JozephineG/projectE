@@ -1,0 +1,4 @@
+.idea
+.person.csv.icloud
+*.iml
+target/
