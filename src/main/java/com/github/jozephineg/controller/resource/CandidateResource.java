@@ -17,8 +17,6 @@ import java.util.logging.Logger;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class CandidateResource {
-    private Logger logger = Logger.getLogger(CandidateResource.class.getName());
-
     private CandidateSearchLogic candidateSearchLogic;
 
     @Autowired

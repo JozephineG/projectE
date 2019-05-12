@@ -28,9 +28,9 @@ public class VotingResourceTest {
                 .build();
         when(votingSearchLogic.findByConstituency("Dalarnas Län")).thenReturn(List.of(voting));
 
-        VotingResource candidateResource = new VotingResource(votingSearchLogic);
+        VotingResource votingResource = new VotingResource(votingSearchLogic);
 
-        List<Voting> response = candidateResource.searchForVoting("Dalarnas Län", "");
+        List<Voting> response = votingResource.searchForVoting("Dalarnas Län", "");
         assertEquals(1, response.size());
         assertEquals("votingId", response.get(0).getVotingId());
         assertEquals("testIntressentId", response.get(0).getIntressentId());
@@ -42,7 +42,7 @@ public class VotingResourceTest {
 
     @Test
     public void successfulSearchByVotingId() {
-        VotingSearchLogic candidateSearchLogic = mock( VotingSearchLogic.class);
+        VotingSearchLogic votingSearchLogic = mock( VotingSearchLogic.class);
         Voting voting = new Voting.Builder()
                 .withVotingId("votingId")
                 .withIntressentId("testIntressentId")
@@ -51,11 +51,11 @@ public class VotingResourceTest {
                 .withConstituent("Dalarnas Län")
                 .withParty("KD")
                 .build();
-        when(candidateSearchLogic.findByVotingId("votingId")).thenReturn(List.of(voting));
+        when(votingSearchLogic.findByVotingId("votingId")).thenReturn(List.of(voting));
 
-        VotingResource candidateResource = new VotingResource(candidateSearchLogic);
+        VotingResource votingResource = new VotingResource(votingSearchLogic);
 
-        List<Voting> response = candidateResource.searchForVoting("", "votingId");
+        List<Voting> response = votingResource.searchForVoting("", "votingId");
         assertEquals(1, response.size());
         assertEquals("votingId", response.get(0).getVotingId());
         assertEquals("testIntressentId", response.get(0).getIntressentId());
@@ -67,35 +67,35 @@ public class VotingResourceTest {
 
     @Test
     public void failedSearchByConstituent() {
-         VotingSearchLogic candidateSearchLogic = mock( VotingSearchLogic.class);
-        when(candidateSearchLogic.findByConstituency("Kronobergs län")).thenReturn(List.of(new Voting.Builder().build()));
+         VotingSearchLogic votingSearchLogic = mock( VotingSearchLogic.class);
+        when(votingSearchLogic.findByConstituency("Kronobergs län")).thenReturn(List.of(new Voting.Builder().build()));
 
-        VotingResource candidateResource = new VotingResource(candidateSearchLogic);
+        VotingResource votingResource = new VotingResource(votingSearchLogic);
 
-        List<Voting> response = candidateResource.searchForVoting("Dalarnas Län", "");
+        List<Voting> response = votingResource.searchForVoting("Dalarnas Län", "");
         assertEquals(0, response.size());
     }
 
     @Test
     public void failedSearchByVoting() {
-        VotingSearchLogic candidateSearchLogic = mock( VotingSearchLogic.class);
-        when(candidateSearchLogic.findByVotingId("exists")).thenReturn(List.of(new Voting.Builder().build()));
+        VotingSearchLogic votingSearchLogic = mock( VotingSearchLogic.class);
+        when(votingSearchLogic.findByVotingId("exists")).thenReturn(List.of(new Voting.Builder().build()));
 
-        VotingResource candidateResource = new VotingResource(candidateSearchLogic);
+        VotingResource votingResource = new VotingResource(votingSearchLogic);
 
-        List<Voting> response = candidateResource.searchForVoting("", "doesnotexist");
+        List<Voting> response = votingResource.searchForVoting("", "doesnotexist");
         assertEquals(0, response.size());
     }
 
     @Test()
     public void failedWhenPassingNull() {
-         VotingSearchLogic candidateSearchLogic = mock( VotingSearchLogic.class);
-        when(candidateSearchLogic.findByConstituency("Stockholms län")).thenReturn(List.of(new Voting.Builder().build()));
+         VotingSearchLogic votingSearchLogic = mock( VotingSearchLogic.class);
+        when(votingSearchLogic.findByConstituency("Stockholms län")).thenReturn(List.of(new Voting.Builder().build()));
 
-        VotingResource candidateResource = new VotingResource(candidateSearchLogic);
+        VotingResource votingResource = new VotingResource(votingSearchLogic);
 
         assertThrows(BadRequestException.class, () -> {
-            candidateResource.searchForVoting("", "");
+            votingResource.searchForVoting("", "");
         });
     }
 }
