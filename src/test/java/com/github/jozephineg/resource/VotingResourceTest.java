@@ -14,18 +14,18 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class VotingResourceTest {
-
-    @Test
-    public void successfulSearchByVoting() {
-        VotingSearchLogic votingSearchLogic = mock(VotingSearchLogic.class);
-        Voting voting = new Voting.Builder()
-                .withIntressentId("testIntressentId")
+    private Voting voting = new Voting.Builder()
+            .withIntressentId("testIntressentId")
                 .withVotingId("votingId")
                 .withYearOfBirth("1989")
                 .withGender("Woman")
                 .withConstituent("Dalarnas Län")
                 .withParty("KD")
                 .build();
+
+    @Test
+    public void successfulSearchByVoting() {
+        VotingSearchLogic votingSearchLogic = mock(VotingSearchLogic.class);
         when(votingSearchLogic.findByConstituency("Dalarnas Län")).thenReturn(List.of(voting));
 
         VotingResource votingResource = new VotingResource(votingSearchLogic);
@@ -43,14 +43,6 @@ public class VotingResourceTest {
     @Test
     public void successfulSearchByVotingId() {
         VotingSearchLogic votingSearchLogic = mock( VotingSearchLogic.class);
-        Voting voting = new Voting.Builder()
-                .withVotingId("votingId")
-                .withIntressentId("testIntressentId")
-                .withYearOfBirth("1989")
-                .withGender("Woman")
-                .withConstituent("Dalarnas Län")
-                .withParty("KD")
-                .build();
         when(votingSearchLogic.findByVotingId("votingId")).thenReturn(List.of(voting));
 
         VotingResource votingResource = new VotingResource(votingSearchLogic);

@@ -1,7 +1,6 @@
 package com.github.jozephineg.integrationtest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.jozephineg.model.data.Candidate;
 import com.github.jozephineg.model.data.Voting;
 import org.junit.Test;
 import org.junit.runner.RunWith;

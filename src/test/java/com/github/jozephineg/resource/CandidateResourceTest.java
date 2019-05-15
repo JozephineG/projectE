@@ -14,21 +14,23 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class CandidateResourceTest {
+    private Candidate olle = new Candidate.Builder()
+            .withIntressentId("testIntressentId")
+            .withFirstName("Olle")
+            .withLastName("Boll")
+            .withYearOfBirth("1989")
+            .withGender("Woman")
+            .withConstituent("Dalarnas Län")
+            .withOrgan("testOrgan")
+            .withParty("KD")
+            .withRole("Ledamot")
+            .withTitle("testTitle")
+            .build();
 
     @Test
     public void successfulSearchByConstituency() {
         CandidateSearchLogic candidateSearchLogic = mock(CandidateSearchLogic.class);
-        Candidate candidate = new Candidate.Builder()
-                .withIntressentId("testIntressentId")
-                .withYearOfBirth("1989")
-                .withGender("Woman")
-                .withConstituent("Dalarnas Län")
-                .withOrgan("testOrgan")
-                .withParty("KD")
-                .withRole("Ledamot")
-                .withTitle("testTitle")
-                .build();
-        when(candidateSearchLogic.findByConstituency("Dalarnas Län")).thenReturn(List.of(candidate));
+        when(candidateSearchLogic.findByConstituency("Dalarnas Län")).thenReturn(List.of(olle));
 
         CandidateResource candidateResource = new CandidateResource(candidateSearchLogic);
 
@@ -47,19 +49,7 @@ public class CandidateResourceTest {
     @Test
     public void successfulSearchByFirstAndLastName() {
         CandidateSearchLogic candidateSearchLogic = mock(CandidateSearchLogic.class);
-        Candidate candidate = new Candidate.Builder()
-                .withFirstName("Olle")
-                .withLastName("Boll")
-                .withIntressentId("testIntressentId")
-                .withYearOfBirth("1989")
-                .withGender("Woman")
-                .withConstituent("Dalarnas Län")
-                .withOrgan("testOrgan")
-                .withParty("KD")
-                .withRole("Ledamot")
-                .withTitle("testTitle")
-                .build();
-        when(candidateSearchLogic.findByFirstNameAndLastName("Olle", "Boll")).thenReturn(List.of(candidate));
+        when(candidateSearchLogic.findByFirstNameAndLastName("Olle", "Boll")).thenReturn(List.of(olle));
 
         CandidateResource candidateResource = new CandidateResource(candidateSearchLogic);
 

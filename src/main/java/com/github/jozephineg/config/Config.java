@@ -1,5 +1,6 @@
 package com.github.jozephineg.config;
 
+import com.github.jozephineg.controller.mapper.BadRequestMapper;
 import com.github.jozephineg.controller.resource.CandidateResource;
 import com.github.jozephineg.controller.resource.VotingResource;
 import org.elasticsearch.client.Client;
@@ -26,6 +27,7 @@ public class Config extends ResourceConfig {
     public Config() {
         register(CandidateResource.class);
         register(VotingResource.class);
+        register(BadRequestMapper.class);
     }
 
     @Bean
