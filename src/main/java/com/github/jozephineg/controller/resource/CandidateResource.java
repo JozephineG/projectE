@@ -33,7 +33,7 @@ public class CandidateResource {
             return candidateSearchLogic.findByFirstNameAndLastName(firstName, lastName);
         }
 
-        throw new BadRequestException("You need to specify either firstName, lastName or constituency");
+        throw new BadRequestException("You need to specify either firstName and lastName or constituency");
     }
 
 
